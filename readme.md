@@ -68,10 +68,14 @@ user=> (shtatic/package!) ; => out: target/shtatic.jar
 ### Deploy
 Pick your poison on how to deploy your jar file.
 
+## Markdown
+
+Uses [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide) variant.
 
 ## Couple Of Quips
 1. In order to keep things simple, use [classless css](https://github.com/dbohdan/classless-css)
 files.
+
 
 ## Roadmap
 - [x] Config file format
