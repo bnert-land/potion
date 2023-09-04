@@ -1,0 +1,4 @@
+{:deps {bnert.land/shtatic {:local/root "../../"}}
+ :aliases
+ {:dev {:extra-paths ["development"]}}}
+

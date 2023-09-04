@@ -1,0 +1,7 @@
+{:paths ["src"]
+ :deps  {io.github.clojure/tools.build {:mvn/version "0.9.5"}
+         markdown-clj/markdown-clj {:mvn/version "1.11.4"}
+         hiccup/hiccup {:mvn/version "2.0.0-RC1"}
+         http-kit/http-kit {:mvn/version "2.7.0"}}
+ :aliases
+ {:dev {:extra-paths ["development"]}}}
