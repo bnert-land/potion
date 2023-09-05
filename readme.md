@@ -1,6 +1,11 @@
 # shtatic
 
-Yet another static site generator.
+Yet another static site thingy. Right now, markdown files are put onto
+the class path and rendered ad hoc.
+
+While slower, this has allowed for a pretty quick development time, and
+has kept development/repl and prod homogenous. It is on the roadmap to
+perform true static site generation, but for now, not a priority.
 
 ## Why?
 
@@ -22,7 +27,7 @@ via `deps.edn`
 $ touch shtatic.edn
 ```
 
-In `shtatic.edn` (showing defaults):
+In `shtatic.edn` (showing defaults)
 ```
 {:css  [["https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css"]]
  :site {""         "pages/index.md"
@@ -77,10 +82,11 @@ Uses [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdow
 1. In order to keep things simple, use [classless css](https://github.com/dbohdan/classless-css)
 files.
 
-## Roadmap
+## Roadmap (In No Particular Order)
 - [x] Config file format
 - [x] REPL functions for content
 - [x] REPL functions for building jar's
+- [ ] True static site generation
 - [ ] "Zero config" tree walking for sourcing files
 - [ ] Bunch o' classless css by default
 - [ ] File watch + fast refresh (dev only)
