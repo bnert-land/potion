@@ -1,16 +1,18 @@
 (ns user)
 
-(require '[land.bnert.shtatic :as shtatic] :reload)
+(require '[land.bnert.shtatic.core :as shtatic] :reload)
+(require '[land.bnert.shtatic.build :as build] :reload)
 
 (comment
-
-  (shtatic/pattern->prelude "^path/hello/index.md")
 
   (def site (shtatic/site!))
 
   (shtatic/start site)
   (shtatic/refresh site)
   (shtatic/stop site)
+
+  (build/clean)
+  (build/uber!)
 
   (shtatic/paths site)
 )

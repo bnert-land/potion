@@ -49,7 +49,7 @@ Start a REPL:
 ```shell
 $ clj
 Clojure 1.11.1
-user=> (require '[land.bnert.shtatic :as shtatic])
+user=> (require '[land.bnert.shtatic.core :as shtatic])
 user=> (def site (shtatic/site!))
 user=> (shtatic/start site)   ; preview the site
 user=> (shtatic/refresh site) ; refreshes content
@@ -61,8 +61,8 @@ user=> (shtatic/paths site)   ;
 ```shell
 $ clj
 Clojure 1.11.1
-user=> (require '[land.bnert.shtatic :as shtatic])
-user=> (shtatic/package!) ; => out: target/shtatic.jar
+user=> (require '[land.bnert.shtatic.build :as build])
+user=> (build/uber!) ; => out: target/shtatic.jar
 ```
 
 ### Deploy
@@ -76,9 +76,15 @@ Uses [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdow
 1. In order to keep things simple, use [classless css](https://github.com/dbohdan/classless-css)
 files.
 
-
 ## Roadmap
 - [x] Config file format
 - [x] REPL functions for content
-- [ ] REPL functions for building jar's
+- [x] REPL functions for building jar's
+- [ ] "Zero config" tree walking for sourcing files
+- [ ] Bunch o' classless css by default
+- [ ] File watch + fast refresh (dev only)
+- [ ] Custom html/css "components" (injected via parse/read time)
+- [ ] File caching
+- [ ] Remote server provision via REPL
+- [ ] Remote server deploy via REPL/git
 
