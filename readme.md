@@ -11,9 +11,10 @@ creation tool.
 
 ## Quick Start
 ### Install
-via `deps.edn`:
+via `deps.edn`
 ```
-{:deps {bnert.land/shtatic {:git/sha "..."}}}
+{:deps {bnert.land/shtatic {:git/sha "0739ed49c05c740a1385bbc4768a68161b8583a8"
+                            :git/url "https://github.com/bnert-land/shtatic.git"}}}
 ```
 
 ### Add Site Metadata
