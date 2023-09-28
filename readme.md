@@ -1,4 +1,4 @@
-# shtatic
+# potion
 
 Yet another static site thingy. Right now, markdown files are put onto
 the class path and rendered ad hoc.
@@ -18,16 +18,16 @@ creation tool.
 ### Install
 via `deps.edn`
 ```
-{:deps {bnert.land/shtatic {:git/sha "0739ed49c05c740a1385bbc4768a68161b8583a8"
-                            :git/url "https://github.com/bnert-land/shtatic.git"}}}
+{:deps {bnert.land/potion {:git/sha "0739ed49c05c740a1385bbc4768a68161b8583a8"
+                           :git/url "https://github.com/bnert-land/potion.git"}}}
 ```
 
 ### Add Site Metadata
 ```shell
-$ touch shtatic.edn
+$ touch potion.edn
 ```
 
-In `shtatic.edn` (showing defaults)
+In `potion.edn` (showing defaults)
 ```
 {:css  [["https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css"]]
  :site {""         "pages/index.md"
@@ -42,7 +42,7 @@ In `shtatic.edn` (showing defaults)
 
 ### Create a pages
 ```shell
-$ echo '# Welcome to shtatic 👋' > pages/index.md
+$ echo '# Welcome to potion 👋' > pages/index.md
 $ echo '# About' > pages/about.md
 $ echo '# Posts' > pages/index.md
 $ echo '- [Hello World](pages/001-hello-world.md)' >> pages/index.md
@@ -55,20 +55,20 @@ Start a REPL:
 ```shell
 $ clj
 Clojure 1.11.1
-user=> (require '[land.bnert.shtatic.core :as shtatic])
-user=> (def site (shtatic/site!))
-user=> (shtatic/start site)   ; preview the site
-user=> (shtatic/refresh site) ; refreshes content
-user=> (shtatic/stop site)    ; when ready to stop site
-user=> (shtatic/paths site)   ; 
+user=> (require '[potion.core :as potion])
+user=> (def site (potion/site!))
+user=> (potion/start site)   ; preview the site
+user=> (potion/refresh site) ; refreshes content
+user=> (potion/stop site)    ; when ready to stop site
+user=> (potion/paths site)   ; 
 ```
 
 ### Package (not implemented)
 ```shell
 $ clj
 Clojure 1.11.1
-user=> (require '[land.bnert.shtatic.build :as build])
-user=> (build/uber!) ; => out: target/shtatic.jar
+user=> (require '[potion.build :as build])
+user=> (build/uber!) ; => out: target/potion.jar
 ```
 
 ### Deploy

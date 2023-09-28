@@ -1,4 +1,4 @@
-{:deps {bnert.land/shtatic {:local/root "../../"}}
+{:deps {bnert.land/potion {:local/root "../../"}}
  :aliases
  {:dev {:extra-paths ["development"]}}}
 

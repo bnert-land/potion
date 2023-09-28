@@ -1,8 +1,8 @@
-(ns land.bnert.shtatic
+(ns potion.shim
   (:gen-class)
   (:require
     [clojure.java.io :as io]
-    [land.bnert.shtatic.core :as core]))
+    [potion.core :as core]))
 
 (defn -main [& _args]
   (core/start (core/site! {:fn/reader io/resource})))

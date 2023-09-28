@@ -1,4 +1,4 @@
-(ns land.bnert.shtatic.build
+(ns potion.build
   (:require
     [clojure.edn :as edn]
     [clojure.tools.build.api :as build]))
@@ -14,23 +14,23 @@
   ([]
    (uber! {}))
   ([{:keys [config]
-     :or   {config "shtatic.edn"}}]
+     :or   {config "potion.edn"}}]
    (let [config' (try (edn/read-string (slurp config))
                       (catch Exception _e
                         {}))
          config'   (-> config'
                        (update :out/dir (fnil identity "target"))
-                       (update :out/name (fnil identity "shtatic.jar")))
+                       (update :out/name (fnil identity "potion.jar")))
          clsdir    (str (:out/dir config') "/classes")
          uber-file (str (:out/dir config') "/" (:out/name config'))
          basis     (build/create-basis {:project "deps.edn"})]
      (build/copy-dir {:src-dirs   ["pages"]
                       :target-dir clsdir})
      (build/compile-clj {:basis     basis
-                         :ns-compile ['land.bnert.shtatic]
+                         :ns-compile ['potion.shim]
                          :class-dir clsdir})
      (build/uber {:class-dir clsdir
                   :uber-file uber-file
                   :basis     basis
-                  :main      'land.bnert.shtatic}))))
+                  :main      'potion.shim}))))
 

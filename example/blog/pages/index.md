@@ -1,9 +1,17 @@
-# ⛰️  bnert.land ⛰️
+# ⛰️  bnert.land
 
-- [about](/about.md)
-- [posts](/posts/index.md)
+<nav>
+  <style>
+    nav a {
+        margin-right: .5rem;
+    }
+  </style>
+  <a href="/about.md">about</a>
+  <a href="/posts/index.md">posts</a>
+</nav>
 
 👋 hey, welcome to bnert.land!
+
 
 ### Creed
 

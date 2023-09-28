@@ -1,4 +1,4 @@
-(ns land.bnert.shtatic.core
+(ns potion.core
   (:require
     [clojure.edn :as edn]
     [clojure.java.io :as io]
@@ -7,10 +7,10 @@
     [org.httpkit.server :as server]
     [markdown.core :as md]))
 
-(def default-shtatic-css
+(def default-potion-css
   [["https://cdn.jsdelivr.net/npm/sakura.css/css/sakura.css"]])
 
-(def default-shtatic-pages
+(def default-potion-pages
   {""          "^pages/index.md$"
    "/about.md" "^pages/about.md$"
    "/posts"    "^pages/posts/[-_A-Za-z0-9]+.md$"})
@@ -79,15 +79,28 @@
              (conj [:title (first (:title metadata))]))
          [:body
           [:article
-            (h/raw (:html md))]]]))))
+            (h/raw (:html md))]]
+         [:footer
+          {:style {:font-size  ".75em"
+                   :margin-top "8rem"
+                   :padding    "1rem 0rem"
+                   :border-top "1px solid forestgreen"}}
+          [:p "made with potion"]]]))))
+
+(defn maybe-realize->response [content uri config]
+  (let [p (get @content uri)]
+    ; i.e. not realized
+    (when-not (string? p)
+      (swap! content update uri #(render-md (slurp %) config)))
+    {:status 200
+     :headers {"Content-Type" "text/html"}
+     :body    (get @content uri)}))
 
 
 (defn handler [content config]
-  (fn [req]
-    (if-let [p? (get @content (:uri req))]
-      {:status 200
-       :headers {"Content-Type" "text/html"}
-       :body    (render-md (slurp p?) config)}
+  (fn [{:keys [:uri]}]
+    (if (get @content uri)
+      (maybe-realize->response content uri config)
       {:status 404
        :headers {"Content-Type" "tekt/html"}
        :body    (render-md "# Not found" config)})))
@@ -128,13 +141,13 @@
      :file/keys [reader]
      :or        {reader io/file
                  port   4076
-                 config "shtatic.edn"}}]
+                 config "potion.edn"}}]
    (let [slurped? (try (slurp config) (catch Exception _e "{}"))]
      (ContentServer. (atom {})
                      reader
                      (atom nil)
                      port
                      (-> (edn/read-string slurped?)
-                         (update :css  (fnil identity default-shtatic-css))
-                         (update :site (fnil identity default-shtatic-pages)))))))
+                         (update :css  (fnil identity default-potion-css))
+                         (update :site (fnil identity default-potion-pages)))))))
 
