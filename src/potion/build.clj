@@ -1,36 +1,35 @@
 (ns potion.build
   (:require
+    clojure.pprint
     [clojure.edn :as edn]
-    [clojure.tools.build.api :as build]))
+    [clojure.tools.deps :as t.d]
+    [clojure.tools.build.api :as t.b]))
+
+(defn project-aliases []
+  (-> (t.d/find-edn-maps) :project-edn :aliases))
 
 (defn clean
   ([]
    (clean nil))
   ([_]
-   (build/delete {:path "target"})))
+   (t.b/delete {:path "target"})))
 
 ;; TODO: make more customizeable
-(defn uber!
-  ([]
-   (uber! {}))
-  ([{:keys [config]
-     :or   {config "potion.edn"}}]
-   (let [config' (try (edn/read-string (slurp config))
-                      (catch Exception _e
-                        {}))
-         config'   (-> config'
-                       (update :out/dir (fnil identity "target"))
-                       (update :out/name (fnil identity "potion.jar")))
-         clsdir    (str (:out/dir config') "/classes")
-         uber-file (str (:out/dir config') "/" (:out/name config'))
-         basis     (build/create-basis {:project "deps.edn"})]
-     (build/copy-dir {:src-dirs   ["pages"]
-                      :target-dir clsdir})
-     (build/compile-clj {:basis     basis
-                         :ns-compile ['potion.shim]
-                         :class-dir clsdir})
-     (build/uber {:class-dir clsdir
-                  :uber-file uber-file
-                  :basis     basis
-                  :main      'potion.shim}))))
+(defn uber [_]
+  (let [potion-alias ((project-aliases) :potion {})
+        config (-> (select-keys potion-alias [:out-dir :out-name])
+                   (update :out-dir  (fnil identity "target"))
+                   (update :out-name (fnil identity "potion.jar")))
+        basis (t.b/create-basis
+                {:project "deps.edn"
+                 :extra   (potion-alias :deps {})})]
+    (t.b/compile-clj
+      {:basis      basis
+       :class-dir  (str (config :out-dir) "/classes")
+       :ns-compile ['potion.shim]})
+    (t.b/uber
+      {:basis     basis
+       :class-dir (str (config :out-dir) "/classes")
+       :uber-file (str (config :out-dir) "/" (config :out-name) ".jar")
+       :main      'potion.shim})))
 

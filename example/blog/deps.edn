@@ -1,4 +1,9 @@
 {:deps {bnert.land/potion {:local/root "../../"}}
+ :paths ["pages"]
  :aliases
- {:dev {:extra-paths ["development"]}}}
+ {:dev    {:extra-paths ["development"]}
+  :potion {:deps        {bnert.land/potion {:local/root "../../"}}
+           :out-dir     "target"  ; default
+           :out-name    "example-blog"
+           :ns-default  potion.build}}}
 

@@ -12,7 +12,7 @@
   (potion/stop site)
 
   (build/clean)
-  (build/uber!)
+  (build/uber nil)
 
   (potion/paths site)
 )

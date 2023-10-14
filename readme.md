@@ -60,7 +60,6 @@ user=> (def site (potion/site!))
 user=> (potion/start site)   ; preview the site
 user=> (potion/refresh site) ; refreshes content
 user=> (potion/stop site)    ; when ready to stop site
-user=> (potion/paths site)   ; 
 ```
 
 ### Package (not implemented)
@@ -76,20 +75,23 @@ Pick your poison on how to deploy your jar file.
 
 ## Markdown
 
-Uses [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide) variant.
+Uses [MultiMarkdown](https://github.com/fletcher/MultiMarkdown/wiki/MultiMarkdown-Syntax-Guide) variant,
+because I didn't want to write a markdown interpreter.
 
 ## Couple Of Quips
 1. In order to keep things simple, use [classless css](https://github.com/dbohdan/classless-css)
 files.
 
 ## Roadmap (In No Particular Order)
+
+### Seems important and useful
 - [x] Config file format
 - [x] REPL functions for content
 - [x] REPL functions for building jar's
-- [ ] True static site generation
-- [ ] "Zero config" tree walking for sourcing files
-- [ ] Bunch o' classless css by default
-- [ ] File watch + fast refresh (dev only)
+- [ ] "Zero config" tree walking for sourcing files (i.e. directory based routing)
+
+### Not as important but seem useful
+
 - [ ] Custom html/css "components" (injected via parse/read time)
 - [ ] File caching
 - [ ] Remote server provision via REPL
